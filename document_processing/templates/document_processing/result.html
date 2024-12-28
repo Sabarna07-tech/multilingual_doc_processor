@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Results</title>
+    <link rel="stylesheet" href="{% static 'document_processing/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ _('Document Processing Results') }}</h1>
+
+        {% if processed_text %}
+            <h2>{{ _('Extracted Text:') }}</h2>
+            <p>{{ processed_text }}</p>
+
+            <h2>{{ _('Detected Language:') }}</h2>
+            <p>{{ language }}</p>
+
+            <h2>{{ _('Translated Text (English):') }}</h2>
+            <p>{{ translated_text }}</p>
+        {% endif %}
+
+        <h2>{{ _('Ask a Question:') }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="question" placeholder="{{ _('Type your question here...') }}" required>
+            <button type="submit" class="btn btn-primary">{{ _('Ask') }}</button>
+        </form>
+
+        {% if answer %}
+            <h2>{{ _('Answer:') }}</h2>
+            <p>{{ answer }}</p>
+        {% endif %}
+
+        <div class="back-link">
+            <a href="{% url 'upload_document' %}">{{ _('Upload Another Document') }}</a>
+        </div>
+    </div>
+</body>
+</html>
