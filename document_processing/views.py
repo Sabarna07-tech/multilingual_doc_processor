@@ -100,7 +100,7 @@ index = faiss.IndexFlatL2(384)  # Dimension of embeddings for 'all-MiniLM-L6-v2'
 documents = []  # To store extracted text chunks
 
 # OpenAI API Key
-openai.api_key = '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'
+openai.api_key = 'your-openai-api-key'
 
 def extract_text_from_pdf(file_path):
     reader = PdfReader(file_path)
