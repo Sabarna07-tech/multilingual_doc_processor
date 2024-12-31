@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Document Details</h1>
+
+<p><strong>File Name:</strong> {{ document.file_name }}</p>
+<p><strong>Uploaded At:</strong> {{ document.uploaded_at }}</p>
+<p><strong>Language:</strong> {{ document.language }}</p>
+<p><strong>Extracted Text:</strong></p>
+<pre>{{ document.text }}</pre>
+<p><strong>Translated Text:</strong></p>
+<pre>{{ document.translated_text }}</pre>
+
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}

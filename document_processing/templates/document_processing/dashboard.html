@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<!-- Search and Filters -->
+<form method="get" action="{% url 'dashboard' %}">
+    <input type="text" name="search" placeholder="Search documents..." value="{{ search_query }}">
+    <select name="language">
+        <option value="">Filter by Language</option>
+        <option value="en" {% if language_filter == 'en' %}selected{% endif %}>English</option>
+        <option value="es" {% if language_filter == 'es' %}selected{% endif %}>Spanish</option>
+        <!-- Add more languages as needed -->
+    </select>
+    <input type="date" name="date" value="{{ date_filter }}">
+    <button type="submit">Apply</button>
+</form>
+
+<h2>Your Document History</h2>
+<ul>
+    {% for document in documents %}
+        <li>
+            <strong>{{ document.file_name }}</strong> (Uploaded on {{ document.uploaded_at }})
+            <ul>
+                <li>Language: {{ document.language }}</li>
+                <li>Extracted Text: {{ document.text|truncatechars:100 }}</li>
+                <li>Translated Text: {{ document.translated_text|truncatechars:100 }}</li>
+                <li>
+                    <a href="{% url 'document_detail' document.id %}">View Details</a>
+                </li>
+            </ul>
+        </li>
+    {% empty %}
+        <p>No documents found.</p>
+    {% endfor %}
+</ul>
+
+<ul>
+    {% for document in documents %}
+        <li>
+            <strong>{{ document.file_name }}</strong> (Uploaded on {{ document.uploaded_at }})
+            <ul>
+                <li>Language: {{ document.language }}</li>
+                <li>Extracted Text: {{ document.text|truncatechars:100 }}</li>
+                <li>Translated Text: {{ document.translated_text|truncatechars:100 }}</li>
+                <li>
+                    <a href="{% url 'document_detail' document.id %}">View Details</a>
+                </li>
+                <li>
+                    <a href="{% url 'export_document' document.id %}">Download</a> <!-- Export link -->
+                </li>
+            </ul>
+        </li>
+    {% empty %}
+        <p>No documents found.</p>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
