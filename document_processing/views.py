@@ -14,6 +14,7 @@ from sentence_transformers import SentenceTransformer
 import faiss
 import os
 import openai
+from django.conf import settings
 
 # Initialize FAISS and SentenceTransformer
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -21,7 +22,7 @@ index = faiss.IndexFlatL2(384)  # Dimension of embeddings for 'all-MiniLM-L6-v2'
 documents = []  # To store extracted text chunks
 
 # OpenAI API Key
-openai.api_key = ''
+openai.api_key = settings.OPENAI_API_KEY
 
 # Helper functions
 def extract_text_from_pdf(file_path):

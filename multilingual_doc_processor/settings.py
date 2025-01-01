@@ -136,3 +136,10 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'upload_document'
 LOGOUT_REDIRECT_URL = 'login'
 
+# settings.py
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
